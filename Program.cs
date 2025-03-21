@@ -88,6 +88,11 @@ namespace SimpleStudentManagementProject_CSharpProject1
 
         static void ViewingAllStudents()
         {
+            if (StudentCounter == 0)
+            {
+                Console.WriteLine("No students available.");
+                return;
+            }
             for (int i = 0; i < StudentCounter; i++)
             {
                 Console.WriteLine($"Student {i + 1}:");
@@ -99,7 +104,23 @@ namespace SimpleStudentManagementProject_CSharpProject1
         }
 
 
-
+        static void FindStudent()
+        {
+            Console.WriteLine("Enter the neme of student: ");
+            string SearchName= Console.ReadLine().ToLower();
+            for (int i = 0; i < StudentCounter; i++) 
+            {
+                if (Names[i].ToLower() == SearchName)
+                {
+                    Console.WriteLine($"Mark: {Marks[i]}");
+                    Console.WriteLine($"Age: {Ages[i]}");
+                    Console.WriteLine($"Date of Enrollment: {Dates[i]:yyyy-MM-dd HH:mm:ss}\n");
+                    return;
+                }
+                Console.WriteLine("Student not found.");
+                
+            }
+        }
 
 
 

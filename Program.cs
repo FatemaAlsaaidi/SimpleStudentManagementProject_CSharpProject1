@@ -4,10 +4,10 @@ namespace SimpleStudentManagementProject_CSharpProject1
 {
     internal class Program
     {
-        static double[] marks = new double[10];
+        static double[] Marks = new double[10];
         static int[] Ages = new int[10];
-        static string[] names = new string[10];
-        static DateTime[] dates = new DateTime[10];
+        static string[] Names = new string[10];
+        static DateTime[] Dates = new DateTime[10];
         static int StudentCounter = 0;
         
         static void Main(string[] args)
@@ -52,7 +52,7 @@ namespace SimpleStudentManagementProject_CSharpProject1
             while (StudentCounter < 10)
             {
                 Console.WriteLine($"Enter the name of student {StudentCounter+1}:");
-                names[StudentCounter] = Console.ReadLine();
+                Names[StudentCounter] = Console.ReadLine();
 
                 int Mark;
                 do
@@ -60,7 +60,7 @@ namespace SimpleStudentManagementProject_CSharpProject1
                     Console.WriteLine($"Enter the Mark of student {StudentCounter+1} (0-100): ");
                 } 
                 while (!int.TryParse(Console.ReadLine(), out Mark) || Mark < 0 || Mark > 100);
-                marks[StudentCounter] = Mark;
+                Marks[StudentCounter] = Mark;
 
                 int Age;
                 do
@@ -70,7 +70,7 @@ namespace SimpleStudentManagementProject_CSharpProject1
                 } while (!int.TryParse(Console.ReadLine(), out Age) || Age <= 21);
                 Ages[StudentCounter] = Age;
 
-                dates[StudentCounter] = DateTime.Now;
+                Dates[StudentCounter] = DateTime.Now;
                 Console.WriteLine("Student Add Successfully");
                 StudentCounter++;
 
@@ -88,7 +88,14 @@ namespace SimpleStudentManagementProject_CSharpProject1
 
         static void ViewingAllStudents()
         {
-            
+            for (int i = 0; i < StudentCounter; i++)
+            {
+                Console.WriteLine($"Student {i + 1}:");
+                Console.WriteLine($"Name: {Names[i]}");
+                Console.WriteLine($"Mark: {Marks[i]}");
+                Console.WriteLine($"Age: {Ages[i]}");
+                Console.WriteLine($"Date of Enrollment: {Dates[i]:yyyy-MM-dd HH:mm:ss}\n");
+            }
         }
 
 

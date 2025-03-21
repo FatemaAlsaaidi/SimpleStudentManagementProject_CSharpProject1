@@ -8,12 +8,12 @@ namespace SimpleStudentManagementProject_CSharpProject1
         static int[] Ages = new int[10];
         static string[] names = new string[10];
         static DateTime[] dates = new DateTime[10];
-        static int StudentCounter = 1;
+        static int StudentCounter = 0;
+        
         static void Main(string[] args)
         {
-            char ChoiceChar;
             int choiceNum;
-            while(true)
+            while (true)
             {
                 Console.Clear();
                 Console.WriteLine("Simple Students Management");
@@ -33,7 +33,7 @@ namespace SimpleStudentManagementProject_CSharpProject1
                 switch (choiceNum)
                 {
                     case 1: AddNewStudentRecord(); break;
-                    case 2: break;
+                    case 2: ViewingAllStudents(); break;
                     case 3: break;
                     case 4: break;
                     case 5: break;
@@ -44,57 +44,50 @@ namespace SimpleStudentManagementProject_CSharpProject1
                 }
                 Console.ReadLine();
             }
-            
-            
         }
 
         static void AddNewStudentRecord()
         {
-            //char ChoiceChar='y';
-            //do 
-            //{
-            //    for (int i = 1; i <= 10; i++)
-            //    {
-            //        if (StudentCounter <= 10)
-            //        {
-            //            Console.WriteLine($"Enter the name of student {StudentCounter}:");
-            //            names[i] = Console.ReadLine();
-            //            do
-            //            {
-            //                Console.WriteLine($"Enter the Mark of student {StudentCounter}:");
-            //                marks[i] = int.Parse(Console.ReadLine());
-            //            } while (marks[i] < 0 || marks[i] > 100);
-            //            do
-            //            {
-            //                Console.WriteLine($"Enter the age of student {StudentCounter}:");
-            //                Ages[i] = int.Parse(Console.ReadLine());
+            char ChoiceChar='y';
+            while (StudentCounter < 10)
+            {
+                Console.WriteLine($"Enter the name of student {StudentCounter+1}:");
+                names[StudentCounter] = Console.ReadLine();
 
-            //            } while (Ages[i] < 21);
+                int Mark;
+                do
+                {
+                    Console.WriteLine($"Enter the Mark of student {StudentCounter+1} (0-100): ");
+                } 
+                while (!int.TryParse(Console.ReadLine(), out Mark) || Mark < 0 || Mark > 100);
+                marks[StudentCounter] = Mark;
 
-            //            dates[i] = DateTime.Now;
-            //            string formattedDate = dates[i].ToString("yyyy-MM-dd HH:mm:ss");
+                int Age;
+                do
+                {
+                    Console.WriteLine($"Enter the age of student {StudentCounter+1}: (>21): ");
+                     
+                } while (!int.TryParse(Console.ReadLine(), out Age) || Age <= 21);
+                Ages[StudentCounter] = Age;
 
-            //            Console.WriteLine("Do you want add another student information ? y / n");
-            //            ChoiceChar = Console.ReadKey().KeyChar;
-            //        }
-            //        else
-            //        {
-            //            Console.WriteLine("Can Not Add More Student");
-            //            ChoiceChar = 'n';
-            //        }
-            //    }
-            //    StudentCounter++;
-            //} 
-            //while (ChoiceChar == 'n' || ChoiceChar == 'N');
-            //Console.WriteLine("\n Information Students Add Successfully");   
+                dates[StudentCounter] = DateTime.Now;
+                Console.WriteLine("Student Add Successfully");
+                StudentCounter++;
 
-            //for (int j = 1; j <= StudentCounter; j++)
-            //{
-            //    Console.WriteLine(names);
-            //    Console.WriteLine(marks);
-            //    Console.WriteLine(Ages);
-            //    Console.WriteLine(dates);
-            //}
+                Console.WriteLine("Do you want add another student information ? y / n");
+                ChoiceChar = Console.ReadKey().KeyChar;
+                Console.WriteLine();
+                if (ChoiceChar != 'y' && ChoiceChar != 'Y')
+                    break;
+            }
+            if (StudentCounter == 11)
+                Console.WriteLine("Cannot add more students. Maximum limit reached.");
+
+            
+        }
+
+        static void ViewingAllStudents()
+        {
             
         }
 

@@ -39,7 +39,7 @@ namespace SimpleStudentManagementProject_CSharpProject1
                     case 4: ClassAverage(); break;
                     case 5: TopPerformingStudent(); break;
                     case 6: SortingStudents(); break;
-                    case 7: break;
+                    case 7: DeleteStudentRecord(); break;
                     case 0: return;
                     default: Console.WriteLine("Invalid choice! Try again."); break;
                 }
@@ -175,5 +175,39 @@ namespace SimpleStudentManagementProject_CSharpProject1
 
 
         }
+
+        static void DeleteStudentRecord()
+        {
+            int IndexName = 0;
+            Console.WriteLine("Enter the name of student tou want to delete it: ");
+            string DeleteName = Console.ReadLine().ToLower();
+            for (int i = 0; i < StudentCounter; i++) 
+            { 
+                if (Names[i].ToLower() == DeleteName)
+                {
+                    IndexName = i;
+                    for (int j = IndexName + 1; j < StudentCounter-1; j++) 
+                    {
+                        Names[j] = Names[j-1];
+                        Marks[j] = Marks[j - 1];
+                        Ages[j]= Ages[j-1];
+                        Dates[j] = Dates[j-1];
+                    }
+                    StudentCounter--;
+
+                    Console.WriteLine("Student record deleted successfully.");
+                }
+            }
+
+            for (int i = 0; i < StudentCounter; i++)
+            {
+                Console.WriteLine($"Name: {Names[i]}");
+                Console.WriteLine($"Mark: {Marks[i]}");
+                Console.WriteLine($"Age: {Ages[i]}");
+                Console.WriteLine($"Date of Enrollment: {Dates[i]:yyyy-MM-dd HH:mm:ss}\n");
+            }
+            Console.WriteLine("Student not found.");
+        }
+
     }
 }

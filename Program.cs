@@ -23,7 +23,7 @@ namespace SimpleStudentManagementProject_CSharpProject1
                 Console.WriteLine("3. Find Student");
                 Console.WriteLine("4. Class Average");
                 Console.WriteLine("5. Top-Performing Student");
-                Console.WriteLine("6. View All Students By Marks");
+                Console.WriteLine("6. Sort Students By Marks");
                 Console.WriteLine("7. Delete A Student Record");
                 Console.WriteLine("0. Exit ");
                 Console.Write("Enter your choice: ");
@@ -35,10 +35,10 @@ namespace SimpleStudentManagementProject_CSharpProject1
                 {
                     case 1: AddNewStudentRecord(); break;
                     case 2: ViewingAllStudents(); break;
-                    case 3: break;
-                    case 4: break;
+                    case 3: FindStudent(); break;
+                    case 4: ClassAverage(); break;
                     case 5: break;
-                    case 6: break;
+                    case 6: SortingStudents(); break;
                     case 7: break;
                     case 0: return;
                     default: Console.WriteLine("Invalid choice! Try again."); break;
@@ -134,6 +134,32 @@ namespace SimpleStudentManagementProject_CSharpProject1
             Console.WriteLine($"The Class Average is : {Math.Round(avg,2)}");
         }
 
+        static void SortingStudents()
+        {
+            Console.WriteLine("Students sorted by marks in descending order.");
+            for (int i = 0; i < StudentCounter; i++)
+            {
+                for (int j = i + 1; j < StudentCounter; j++)
+                {
+                    if (Marks[i] < Marks[j])
+                    {
+                        (Marks[i], Marks[j]) = (Marks[j], Marks[i]);
+                        (Names[i], Names[j]) = (Names[j], Names[i]);
+                        (Ages[i], Ages[j]) = (Ages[j], Ages[i]);
+                        (Dates[i], Dates[j]) = (Dates[j], Dates[i]);
+                    }
+                }
+            }
 
+            for (int i = 0;i < StudentCounter; i++)
+            {
+                Console.WriteLine($"Name: {Names[i]}");
+                Console.WriteLine($"Mark: {Marks[i]}");
+                Console.WriteLine($"Age: {Ages[i]}");
+                Console.WriteLine($"Date of Enrollment: {Dates[i]:yyyy-MM-dd HH:mm:ss}\n");
+            }
+
+
+        }
     }
 }

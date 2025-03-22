@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Security.Claims;
 
 namespace SimpleStudentManagementProject_CSharpProject1
 {
@@ -118,10 +119,20 @@ namespace SimpleStudentManagementProject_CSharpProject1
                     return;
                 }
                 Console.WriteLine("Student not found.");
-                
             }
         }
 
+        static void ClassAverage()
+        {
+            double sum = 0;
+            for (int i = 0; i < StudentCounter; i++)
+            {
+                sum = sum + Marks[i];
+            }
+
+            double avg = sum / StudentCounter;
+            Console.WriteLine($"The Class Average is : {Math.Round(avg,2)}");
+        }
 
 
     }

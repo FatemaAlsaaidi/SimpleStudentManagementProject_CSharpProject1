@@ -37,7 +37,7 @@ namespace SimpleStudentManagementProject_CSharpProject1
                     case 2: ViewingAllStudents(); break;
                     case 3: FindStudent(); break;
                     case 4: ClassAverage(); break;
-                    case 5: break;
+                    case 5: TopPerformingStudent(); break;
                     case 6: SortingStudents(); break;
                     case 7: break;
                     case 0: return;
@@ -132,6 +132,20 @@ namespace SimpleStudentManagementProject_CSharpProject1
 
             double avg = sum / StudentCounter;
             Console.WriteLine($"The Class Average is : {Math.Round(avg,2)}");
+        }
+
+        static void TopPerformingStudent()
+        {
+            int IndexTopPerformance = 0;
+            for (int i = 0; i < StudentCounter; i++)
+            {
+                if (Marks[i] > IndexTopPerformance)
+                {
+                    IndexTopPerformance = i;
+                }
+            }
+
+            Console.WriteLine($"Top Student: {Names[IndexTopPerformance]}, Marks: {Marks[IndexTopPerformance]}, Age: {Ages[IndexTopPerformance]}");
         }
 
         static void SortingStudents()

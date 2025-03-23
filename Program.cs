@@ -172,7 +172,7 @@ namespace SimpleStudentManagementProject_CSharpProject1
             Console.WriteLine("Students sorted by marks in descending order.");
             for (int i = 0; i < StudentCounter; i++)
             {
-                for (int j = i + 1; j < StudentCounter; j++)
+                for (int j = 0; j < StudentCounter; j++)
                 {
                     if (Marks[i] < Marks[j])
                     {
@@ -228,6 +228,10 @@ namespace SimpleStudentManagementProject_CSharpProject1
 
                     Console.WriteLine("Student record deleted successfully.");
                 }
+                else
+                {
+                    Console.WriteLine("Student not found.");
+                }
             }
 
             for (int i = 0; i < StudentCounter; i++)
@@ -237,7 +241,8 @@ namespace SimpleStudentManagementProject_CSharpProject1
                 Console.WriteLine($"Age: {Ages[i]}");
                 Console.WriteLine($"Date of Enrollment: {Dates[i]:yyyy-MM-dd HH:mm:ss}\n");
             }
-            Console.WriteLine("Student not found.");
+                
+            
         }
 
     }

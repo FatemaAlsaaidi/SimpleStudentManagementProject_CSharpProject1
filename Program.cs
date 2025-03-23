@@ -55,20 +55,34 @@ namespace SimpleStudentManagementProject_CSharpProject1
                 Console.WriteLine($"Enter the name of student {StudentCounter+1}:");
                 Names[StudentCounter] = Console.ReadLine();
 
-                int Mark;
+                double Mark;
                 do
                 {
                     Console.WriteLine($"Enter the Mark of student {StudentCounter+1} (0-100): ");
+                    Mark = double.Parse(Console.ReadLine());
+
+                    if (Mark < 0 || Mark > 100)
+                    {
+                        Console.WriteLine("Incorrect Mark format or it not in rang (0-100), please try again.");
+                        
+                    }
                 } 
-                while (!int.TryParse(Console.ReadLine(), out Mark) || Mark < 0 || Mark > 100);
+                while (Mark < 0 || Mark > 100);
+                Console.WriteLine("Mark Entered Successfully!");
                 Marks[StudentCounter] = Mark;
 
                 int Age;
                 do
                 {
                     Console.WriteLine($"Enter the age of student {StudentCounter+1}: (>21): ");
-                     
-                } while (!int.TryParse(Console.ReadLine(), out Age) || Age <= 21);
+                    Age = int.Parse(Console.ReadLine());
+                    if (Age <= 21)
+                    {
+                        Console.WriteLine("Invalid Age Number format ot it less than 21, please try again.");
+                    }
+
+                } while (Age <= 21);
+                Console.WriteLine("Age Entered Successfully!");
                 Ages[StudentCounter] = Age;
 
                 Dates[StudentCounter] = DateTime.Now;

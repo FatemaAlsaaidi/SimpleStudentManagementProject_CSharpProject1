@@ -150,6 +150,11 @@ namespace SimpleStudentManagementProject_CSharpProject1
 
         static void SortingStudents()
         {
+            double HoldMark;
+            string HoldName;
+            int HoldAge;
+            DateTime HoldDate;
+
             Console.WriteLine("Students sorted by marks in descending order.");
             for (int i = 0; i < StudentCounter; i++)
             {
@@ -157,10 +162,22 @@ namespace SimpleStudentManagementProject_CSharpProject1
                 {
                     if (Marks[i] < Marks[j])
                     {
-                        (Marks[i], Marks[j]) = (Marks[j], Marks[i]);
-                        (Names[i], Names[j]) = (Names[j], Names[i]);
-                        (Ages[i], Ages[j]) = (Ages[j], Ages[i]);
-                        (Dates[i], Dates[j]) = (Dates[j], Dates[i]);
+                        HoldMark = Marks[i];
+                        Marks[i] = Marks[j];
+                        Marks[j] = HoldMark;
+
+                        HoldName = Names[i];
+                        Names[i] = Names[j];
+                        Names[j] = HoldName;
+
+                        HoldAge = Ages[i];
+                        Ages[i] = Ages[j];
+                        Ages[j] = HoldAge;
+
+                        HoldDate = Dates[i];
+                        Dates[i] = Dates[j];
+                        Dates[j] = HoldDate;
+                        
                     }
                 }
             }

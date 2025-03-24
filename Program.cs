@@ -1,5 +1,7 @@
 ﻿using System.Net;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
+using System.Xml.Linq;
 
 namespace SimpleStudentManagementProject_CSharpProject1
 {
@@ -12,6 +14,7 @@ namespace SimpleStudentManagementProject_CSharpProject1
         static int StudentCounter = 0;
         static double Mark;
         static int Age;
+        static string Name;
 
         static void Main(string[] args)
         {
@@ -68,8 +71,40 @@ namespace SimpleStudentManagementProject_CSharpProject1
             while (StudentCounter < 10)
             {
                 //-----------------------------------------------------------------Name
-                Console.WriteLine($"Enter the name of student {StudentCounter+1}:");
-                Names[StudentCounter] = Console.ReadLine();
+                bool FlagName = true;
+                do
+                {
+                    try
+                    {
+                        Console.WriteLine($"Enter the name of student {StudentCounter + 1}:");
+                        Name = Console.ReadLine();
+
+                        // Check if the name contains special characters
+                        if (!Regex.IsMatch(Name, @"^[a-zA-Z\s]+$"))
+                        {
+                            throw new FormatException("Invalid name! Special characters and numbers are not allowed.");
+                        }
+
+                        // If the name is empty or just spaces, also throw an error
+                        if (string.IsNullOrWhiteSpace(Name))
+                        {
+                            throw new FormatException("Name cannot be empty or spaces only.");
+                        }
+
+                        else
+                        {
+                            FlagName = false;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        // Display error message to user
+                        Console.WriteLine($"Error: {e.Message}");
+                        Console.WriteLine("Press enter to continue...");
+                        Console.ReadKey();  // Wait for user input before clearing the screen
+                    }
+                } while (FlagName);
+
 
                 //--------------------------------------------------------------------------Mark
 
@@ -150,7 +185,7 @@ namespace SimpleStudentManagementProject_CSharpProject1
                 Console.WriteLine("Cannot add more students. Maximum limit reached.");
 
             
-        }S
+        }
 
         static void ViewingAllStudents()
         {

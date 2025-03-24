@@ -5,85 +5,135 @@ namespace SimpleStudentManagementProject_CSharpProject1
 {
     internal class Program
     {
-        static double[] Marks = new double[10];
-        static int[] Ages = new int[10];
-        static string[] Names = new string[10];
-        static DateTime[] Dates = new DateTime[10];
+        static double[] Marks = new double[4];
+        static int[] Ages = new int[4];
+        static string[] Names = new string[4];
+        static DateTime[] Dates = new DateTime[4];
         static int StudentCounter = 0;
-        
+        static double Mark;
+        static int Age;
+
         static void Main(string[] args)
         {
             int choiceNum;
             while (true)
             {
-                Console.Clear();
-                Console.WriteLine("Simple Students Management");
-                Console.WriteLine("1. Add Student");
-                Console.WriteLine("2. View All Students");
-                Console.WriteLine("3. Find Student");
-                Console.WriteLine("4. Class Average");
-                Console.WriteLine("5. Top-Performing Student");
-                Console.WriteLine("6. Sort Students By Marks");
-                Console.WriteLine("7. Delete A Student Record");
-                Console.WriteLine("0. Exit ");
-                Console.Write("Enter your choice: ");
-                choiceNum = int.Parse(Console.ReadLine());
-
-
-
-                switch (choiceNum)
+                
+                try
                 {
-                    case 1: AddNewStudentRecord(); break;
-                    case 2: ViewingAllStudents(); break;
-                    case 3: FindStudent(); break;
-                    case 4: ClassAverage(); break;
-                    case 5: TopPerformingStudent(); break;
-                    case 6: SortingStudents(); break;
-                    case 7: DeleteStudentRecord(); break;
-                    case 0: return;
-                    default: Console.WriteLine("Invalid choice! Try again."); break;
+                    //Mnue of Tasks
+                    Console.Clear();
+                    Console.WriteLine("Simple Students Management");
+                    Console.WriteLine("1. Add Student");
+                    Console.WriteLine("2. View All Students");
+                    Console.WriteLine("3. Find Student");
+                    Console.WriteLine("4. Class Average");
+                    Console.WriteLine("5. Top-Performing Student");
+                    Console.WriteLine("6. Sort Students By Marks");
+                    Console.WriteLine("7. Delete A Student Record");
+                    Console.WriteLine("0. Exit ");
+                    Console.Write("Enter The Number Of Feature: ");
+                    choiceNum = int.Parse(Console.ReadLine());
+
+                    // Tasks Functons
+                    switch (choiceNum)
+                    {
+                        case 1: AddNewStudentRecord(); break;
+                        case 2: ViewingAllStudents(); break;
+                        case 3: FindStudent(); break;
+                        case 4: ClassAverage(); break;
+                        case 5: TopPerformingStudent(); break;
+                        case 6: SortingStudents(); break;
+                        case 7: DeleteStudentRecord(); break;
+                        case 0: return;
+                        default: Console.WriteLine("Invalid choice! Try again."); break;
+                    }
+                    Console.ReadLine();
                 }
-                Console.ReadLine();
+                catch (Exception e)
+                {
+                    // Display error message to user
+                    Console.WriteLine($"Error: {e.Message}");
+                    Console.WriteLine("Press enter to continue...");
+                    Console.ReadKey();  // Wait for user input before clearing the screen
+                        
+                }
             }
         }
 
         static void AddNewStudentRecord()
         {
-            char ChoiceChar='y';
+            // Iniationlize the ChoiceChar variable to ask user if want add more stunent information
+            char ChoiceChar ='y';
             while (StudentCounter < 10)
             {
+                //-----------------------------------------------------------------Name
                 Console.WriteLine($"Enter the name of student {StudentCounter+1}:");
                 Names[StudentCounter] = Console.ReadLine();
 
-                double Mark;
+                //--------------------------------------------------------------------------Mark
+
+                //double Mark;
+                bool FlagMark = true;
+
                 do
                 {
-                    Console.WriteLine($"Enter the Mark of student {StudentCounter+1} (0-100): ");
-                    Mark = double.Parse(Console.ReadLine());
-
-                    if (Mark < 0 || Mark > 100)
+                    try
                     {
-                        Console.WriteLine("Incorrect Mark format or it not in rang (0-100), please try again.");
-                        
+                        Console.WriteLine($"Enter the Mark of student {StudentCounter + 1} (0-100): ");
+                        Mark = double.Parse(Console.ReadLine());
+
+                        if (Mark < 0 || Mark > 100)
+                        {
+                            Console.WriteLine("Incorrect Mark format or it not in rang (0-100), please try again.");
+
+                        }
+                        else
+                        {
+                            FlagMark = false;
+                        }
                     }
-                } 
-                while (Mark < 0 || Mark > 100);
+                    catch (Exception e)
+                    {
+                        Console.WriteLine($"Error: {e.Message}");
+                        Console.WriteLine("Press enter to continue...");
+                    }
+                }
+                while (FlagMark);
                 Console.WriteLine("Mark Entered Successfully!");
                 Marks[StudentCounter] = Mark;
 
-                int Age;
+                //------------------------------------------------------------------------------Age
+                //int Age;
+                bool FlagAge = true;
                 do
                 {
-                    Console.WriteLine($"Enter the age of student {StudentCounter+1}: (>21): ");
-                    Age = int.Parse(Console.ReadLine());
-                    if (Age <= 21)
+                    try
                     {
-                        Console.WriteLine("Invalid Age Number format ot it less than 21, please try again.");
+                        Console.WriteLine($"Enter the age of student {StudentCounter + 1}: (>21): ");
+                        Age = int.Parse(Console.ReadLine());
+                        if (Age <= 21)
+                        {
+                            Console.WriteLine("Invalid Age Number format ot it less than 21, please try again.");
+                        }
+                        else
+                        {
+                            FlagAge = false;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine($"Error: {e.Message}");
+                        Console.WriteLine("Press enter to continue...");
                     }
 
-                } while (Age <= 21);
+                } while (FlagAge);
                 Console.WriteLine("Age Entered Successfully!");
                 Ages[StudentCounter] = Age;
+
+
+
+                //-----------------------------------------------------------------------------------Date
 
                 Dates[StudentCounter] = DateTime.Now;
                 Console.WriteLine("Student Add Successfully");
@@ -91,15 +141,16 @@ namespace SimpleStudentManagementProject_CSharpProject1
 
                 Console.WriteLine("Do you want add another student information ? y / n");
                 ChoiceChar = Console.ReadKey().KeyChar;
+                Console.ReadKey();
                 Console.WriteLine();
                 if (ChoiceChar != 'y' && ChoiceChar != 'Y')
                     break;
             }
-            if (StudentCounter == 11)
+            if (StudentCounter >= 4)
                 Console.WriteLine("Cannot add more students. Maximum limit reached.");
 
             
-        }
+        }S
 
         static void ViewingAllStudents()
         {
@@ -245,5 +296,34 @@ namespace SimpleStudentManagementProject_CSharpProject1
             
         }
 
+        static void tryAddStudent()
+        {
+            string name;
+            double mark;
+            int age;
+
+            if (StudentCounter >= 10)
+            {
+                Console.WriteLine("Can not add more than 10 students");
+            }
+            else
+            {
+                Console.WriteLine("Enter the name of student :");
+                name = Console.ReadLine();
+                Names[StudentCounter] = name;
+
+                Console.WriteLine("Enter the mark of student :");
+                mark = double.Parse(Console.ReadLine());
+                Marks[StudentCounter] = mark;
+
+                Console.WriteLine("Enter the age of student :");
+                age = int.Parse(Console.ReadLine());
+                Ages[StudentCounter] = age;
+
+            }
+        }
+
     }
+
+    
 }

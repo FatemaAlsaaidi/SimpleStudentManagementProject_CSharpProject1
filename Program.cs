@@ -15,6 +15,8 @@ namespace SimpleStudentManagementProject_CSharpProject1
         static double Mark;
         static int Age;
         static string Name;
+        static DateTime Date;
+        static int triesEnterCorrectValue =0;
 
         static void Main(string[] args)
         {
@@ -67,124 +69,228 @@ namespace SimpleStudentManagementProject_CSharpProject1
         static void AddNewStudentRecord()
         {
             // Iniationlize the ChoiceChar variable to ask user if want add more stunent information
-            char ChoiceChar ='y';
-            while (StudentCounter < 10)
+            //char ChoiceChar ='y';
+            //while (StudentCounter < 4)
+            //{
+            //    //-----------------------------------------------------------------Name
+
+            //    bool FlagName = true;
+            //    do
+            //    {
+            //        try
+            //        {
+            //            Console.WriteLine($"Enter the name of student {StudentCounter + 1}:");
+            //            Name = Console.ReadLine();
+
+            //            // Check if the name contains special characters
+            //            if (!Regex.IsMatch(Name, @"^[a-zA-Z\s]+$"))
+            //            {
+            //                Console.WriteLine("Invalid name! Special characters and numbers are not allowed.");
+            //            }
+
+            //            // If the name is empty or just spaces, also throw an error
+            //            if (string.IsNullOrWhiteSpace(Name))
+            //            {
+            //                Console.WriteLine("Name cannot be empty or spaces only.");
+            //            }
+
+            //            else
+            //            {
+            //                FlagName = false;
+            //            }
+            //        }
+            //        catch (Exception e)
+            //        {
+            //            // Display error message to user
+            //            Console.WriteLine($"Error: {e.Message}");
+            //            Console.WriteLine("Press enter to continue...");
+            //            Console.ReadKey();  // Wait for user input before clearing the screen
+            //        }
+            //    } while (FlagName);
+            //    Names[StudentCounter] = Name;
+
+
+            //    //--------------------------------------------------------------------------Mark
+
+            //    bool FlagMark = true;
+
+            //    do
+            //    {
+            //        try
+            //        {
+            //            Console.WriteLine($"Enter the Mark of student {StudentCounter + 1} (0-100): ");
+            //            Mark = double.Parse(Console.ReadLine());
+
+            //            if (Mark < 0 || Mark > 100)
+            //            {
+            //                Console.WriteLine("Incorrect Mark format or it not in rang (0-100), please try again.");
+
+            //            }
+            //            else
+            //            {
+            //                FlagMark = false;
+            //            }
+            //        }
+            //        catch (Exception e)
+            //        {
+            //            Console.WriteLine($"Error: {e.Message}");
+            //            Console.WriteLine("Press enter to continue...");
+            //        }
+            //    }
+            //    while (FlagMark);
+            //    Console.WriteLine("Mark Entered Successfully!");
+            //    Marks[StudentCounter] = Mark;
+
+            //    //------------------------------------------------------------------------------Age
+            //    bool FlagAge = true;
+            //    do
+            //    {
+            //        try
+            //        {
+            //            Console.WriteLine($"Enter the age of student {StudentCounter + 1}: (>21): ");
+            //            Age = int.Parse(Console.ReadLine());
+            //            if (Age <= 21)
+            //            {
+            //                Console.WriteLine("Invalid Age Number format ot it less than 21, please try again.");
+            //            }
+            //            else
+            //            {
+            //                FlagAge = false;
+            //            }
+            //        }
+            //        catch (Exception e)
+            //        {
+            //            Console.WriteLine($"Error: {e.Message}");
+            //            Console.WriteLine("Press enter to continue...");
+            //        }
+
+            //    } while (FlagAge);
+            //    Console.WriteLine("Age Entered Successfully!");
+            //    Ages[StudentCounter] = Age;
+
+
+
+            //    //-----------------------------------------------------------------------------------Date
+
+            //    Dates[StudentCounter] = DateTime.Now;
+            //    Console.WriteLine("Student Add Successfully");
+            //    StudentCounter++;
+
+            //    Console.WriteLine("Do you want add another student information ? y / n");
+            //    ChoiceChar = Console.ReadKey().KeyChar;
+            //    Console.ReadKey();
+            //    Console.WriteLine();
+            //    if (ChoiceChar != 'y' && ChoiceChar != 'Y')
+            //        break;
+            //}
+            //if (StudentCounter >= 4)
+            //    Console.WriteLine("Cannot add more students. Maximum limit reached.");
+
+
+            //---------------------------------------------------------------------------------------------
+            char ChoiceChar = 'y';
+            bool IsSave = true;
+            bool AddMore = true;
+            while (AddMore && StudentCounter < 4)
             {
-                //-----------------------------------------------------------------Name
-                bool FlagName = true;
-                do
-                {
-                    try
-                    {
-                        Console.WriteLine($"Enter the name of student {StudentCounter + 1}:");
-                        Name = Console.ReadLine();
-
-                        // Check if the name contains special characters
-                        if (!Regex.IsMatch(Name, @"^[a-zA-Z\s]+$"))
-                        {
-                            throw new FormatException("Invalid name! Special characters and numbers are not allowed.");
-                        }
-
-                        // If the name is empty or just spaces, also throw an error
-                        if (string.IsNullOrWhiteSpace(Name))
-                        {
-                            throw new FormatException("Name cannot be empty or spaces only.");
-                        }
-
-                        else
-                        {
-                            FlagName = false;
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        // Display error message to user
-                        Console.WriteLine($"Error: {e.Message}");
-                        Console.WriteLine("Press enter to continue...");
-                        Console.ReadKey();  // Wait for user input before clearing the screen
-                    }
-                } while (FlagName);
-                Names[StudentCounter] = Name;
-
-
-                //--------------------------------------------------------------------------Mark
-
-                //double Mark;
-                bool FlagMark = true;
+                
+                Console.WriteLine($"Enter the name of student {StudentCounter + 1}:");
+                Name = Console.ReadLine();
 
                 do
                 {
-                    try
+                    Console.WriteLine($"Enter the Mark of student {StudentCounter + 1} (0-100): ");
+                    Mark = double.Parse(Console.ReadLine());
+                    triesEnterCorrectValue++;
+                    if (triesEnterCorrectValue >= 5)
                     {
-                        Console.WriteLine($"Enter the Mark of student {StudentCounter + 1} (0-100): ");
-                        Mark = double.Parse(Console.ReadLine());
-
-                        if (Mark < 0 || Mark > 100)
-                        {
-                            Console.WriteLine("Incorrect Mark format or it not in rang (0-100), please try again.");
-
-                        }
-                        else
-                        {
-                            FlagMark = false;
-                        }
+                        Console.WriteLine("You exceeded tries limited");
+                        IsSave = false;
+                        break;
                     }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine($"Error: {e.Message}");
-                        Console.WriteLine("Press enter to continue...");
-                    }
+                } while (Mark < 0 || Mark > 100);
+
+                if (triesEnterCorrectValue >= 5)
+                {
+                    Console.WriteLine("You exceeded tries limited");
+                    IsSave = false;
+                    break;
                 }
-                while (FlagMark);
-                Console.WriteLine("Mark Entered Successfully!");
-                Marks[StudentCounter] = Mark;
 
-                //------------------------------------------------------------------------------Age
-                //int Age;
-                bool FlagAge = true;
                 do
                 {
-                    try
+                    Console.WriteLine($"Enter the age of student {StudentCounter + 1}: (must be > 21): ");
+                    Age = int.Parse(Console.ReadLine());
+                    triesEnterCorrectValue++;
+                    if (triesEnterCorrectValue >= 5)
                     {
-                        Console.WriteLine($"Enter the age of student {StudentCounter + 1}: (>21): ");
-                        Age = int.Parse(Console.ReadLine());
-                        if (Age <= 21)
-                        {
-                            Console.WriteLine("Invalid Age Number format ot it less than 21, please try again.");
-                        }
-                        else
-                        {
-                            FlagAge = false;
-                        }
+                        Console.WriteLine("You exceeded tries limited");
+                        IsSave = false;
+                        break;
                     }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine($"Error: {e.Message}");
-                        Console.WriteLine("Press enter to continue...");
-                    }
+                } while (Age < 21);
 
-                } while (FlagAge);
-                Console.WriteLine("Age Entered Successfully!");
-                Ages[StudentCounter] = Age;
+                if (triesEnterCorrectValue >= 5)
+                {
+                    Console.WriteLine("You exceeded tries limited");
+                    IsSave = false;
+                    break;
+                }
 
+                Date = DateTime.Now;
 
+                if (IsSave = false)
+                {
+                    Console.WriteLine("Student did not save");
+                    break;
+                        
+                }
+                else
+                {
+                    Names[StudentCounter] = Name;
+                    Ages[StudentCounter] = Age;
+                    Marks[StudentCounter] = Mark;
+                    Dates[StudentCounter] = Date;
+                    Console.WriteLine("Student Add Successfully");
+                    triesEnterCorrectValue = 0;
+                    Console.WriteLine("Do you want add another student information ? y / n");
+                    ChoiceChar = Console.ReadKey().KeyChar;
+                    Console.ReadKey();
+                    Console.WriteLine();
+                    StudentCounter ++;
+                }
+                if (StudentCounter > 4)
+                {
+                    Console.WriteLine("Cannot add more students. Maximum limit reached.");
+                    break;
+                }
 
-                //-----------------------------------------------------------------------------------Date
+                
+                //if (StudentCounter > 4)
+                //{
+                //    Console.WriteLine("Cannot add more students. Maximum limit reached.");
+                //    break;
+                //}
 
-                Dates[StudentCounter] = DateTime.Now;
-                Console.WriteLine("Student Add Successfully");
-                StudentCounter++;
-
-                Console.WriteLine("Do you want add another student information ? y / n");
-                ChoiceChar = Console.ReadKey().KeyChar;
-                Console.ReadKey();
+                //Console.WriteLine("Do you want add another student information ? y / n");
+                //ChoiceChar = Console.ReadKey().KeyChar;
+                //Console.ReadKey();
                 Console.WriteLine();
                 if (ChoiceChar != 'y' && ChoiceChar != 'Y')
-                    break;
+                {
+                    AddMore = false;
+                   
+                }
+                //else
+                //{
+                //    if (StudentCounter > 4)
+                //    {
+                //        Console.WriteLine("Cannot add more students. Maximum limit reached.");
+                //        AddMore = false;
+                //    }
+                    
+                //}
             }
-            if (StudentCounter >= 4)
-                Console.WriteLine("Cannot add more students. Maximum limit reached.");
-
             
         }
 
@@ -238,11 +344,14 @@ namespace SimpleStudentManagementProject_CSharpProject1
         static void TopPerformingStudent()
         {
             int IndexTopPerformance = 0;
+            double MaxMark = 0;
             for (int i = 0; i < StudentCounter; i++)
             {
-                if (Marks[i] < IndexTopPerformance)
+                if (Marks[i] > MaxMark)
                 {
                     IndexTopPerformance = i;
+                    MaxMark = Marks[i];
+
                 }
             }
 
@@ -296,8 +405,8 @@ namespace SimpleStudentManagementProject_CSharpProject1
 
         static void DeleteStudentRecord()
         {
-            bool 
-            int IndexName = 0;
+            bool DeleteFlag = true;
+            int IndexName=0;
             Console.WriteLine("Enter the name of student tou want to delete it: ");
             string DeleteName = Console.ReadLine().ToLower();
             for (int i = 0; i < StudentCounter; i++) 
@@ -305,31 +414,33 @@ namespace SimpleStudentManagementProject_CSharpProject1
                 if (Names[i].ToLower() == DeleteName)
                 {
                     IndexName = i;
-                    for (int j = IndexName + 1; j < StudentCounter-1; j++) 
+                    for (int j = IndexName; j < StudentCounter; j++) 
                     {
-                        Names[j] = Names[j-1];
-                        Marks[j] = Marks[j - 1];
-                        Ages[j]= Ages[j-1];
-                        Dates[j] = Dates[j-1];
+                        Names[j] = Names[j+1];
+                        Marks[j] = Marks[j + 1];
+                        Ages[j]= Ages[j+1];
+                        Dates[j] = Dates[j+1];
                     }
                     StudentCounter--;
+                    DeleteFlag = true;
 
-                    Console.WriteLine("Student record deleted successfully.");
-                    
                 }
                 else
                 {
-                    Console.WriteLine("Student not found.");
+                    DeleteFlag = false;
                 }
             }
 
-            for (int i = 0; i < StudentCounter; i++)
+            if (DeleteFlag != false)
             {
-                Console.WriteLine($"Name: {Names[i]}");
-                Console.WriteLine($"Mark: {Marks[i]}");
-                Console.WriteLine($"Age: {Ages[i]}");
-                Console.WriteLine($"Date of Enrollment: {Dates[i]:yyyy-MM-dd HH:mm:ss}\n");
+                Console.WriteLine("Student record deleted successfully.");
             }
+            else
+            {
+                Console.WriteLine("Student not found.");
+            }
+
+            
                 
             
         }

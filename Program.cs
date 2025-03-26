@@ -6,7 +6,7 @@ using System.Xml.Linq;
 namespace SimpleStudentManagementProject_CSharpProject1
 {
     internal class Program
-    {
+    {   // Declare all arries and variables needed ....
         static double[] Marks = new double[4];
         static int[] Ages = new int[4];
         static string[] Names = new string[4];
@@ -17,7 +17,7 @@ namespace SimpleStudentManagementProject_CSharpProject1
         static string Name;
         static DateTime Date;
         static int triesEnterCorrectValue =0;
-
+        //-------- main method
         static void Main(string[] args)
         {
             int choiceNum;
@@ -65,7 +65,7 @@ namespace SimpleStudentManagementProject_CSharpProject1
                 }
             }
         }
-
+        //--------1. Adding a New Student
         static void AddNewStudentRecord()
         {
             // Iniationlize the ChoiceChar variable to ask user if want add more stunent information
@@ -293,7 +293,7 @@ namespace SimpleStudentManagementProject_CSharpProject1
             }
             
         }
-
+        //--------2.Viewing All Students
         static void ViewingAllStudents()
         {
             if (StudentCounter == 0)
@@ -310,8 +310,7 @@ namespace SimpleStudentManagementProject_CSharpProject1
                 Console.WriteLine($"Date of Enrollment: {Dates[i]:yyyy-MM-dd HH:mm:ss}\n");
             }
         }
-
-
+        //--------3. Searching for a Student by Name
         static void FindStudent()
         {
             Console.WriteLine("Enter the neme of student: ");
@@ -328,7 +327,7 @@ namespace SimpleStudentManagementProject_CSharpProject1
             }
             Console.WriteLine("Student not found.");
         }
-
+        //--------4. Calculating the Class Average
         static void ClassAverage()
         {
             double sum = 0;
@@ -340,7 +339,7 @@ namespace SimpleStudentManagementProject_CSharpProject1
             double avg = sum / StudentCounter;
             Console.WriteLine($"The Class Average is : {Math.Round(avg,2)}");
         }
-
+        //--------5. Find the top-performing student 
         static void TopPerformingStudent()
         {
             int IndexTopPerformance = 0;
@@ -357,7 +356,7 @@ namespace SimpleStudentManagementProject_CSharpProject1
 
             Console.WriteLine($"Top Student: {Names[IndexTopPerformance]}, Marks: {Marks[IndexTopPerformance]}, Age: {Ages[IndexTopPerformance]}");
         }
-
+        //-------6. Sorting Students by Marks (Descending Order)
         static void SortingStudents()
         {
             double HoldMark;
@@ -402,7 +401,7 @@ namespace SimpleStudentManagementProject_CSharpProject1
 
 
         }
-
+        //-------7.  Deleting a Student
         static void DeleteStudentRecord()
         {
             bool DeleteFlag = true;

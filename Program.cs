@@ -104,6 +104,7 @@ namespace SimpleStudentManagementProject_CSharpProject1
                         Console.ReadKey();  // Wait for user input before clearing the screen
                     }
                 } while (FlagName);
+                Names[StudentCounter] = Name;
 
 
                 //--------------------------------------------------------------------------Mark
@@ -217,9 +218,9 @@ namespace SimpleStudentManagementProject_CSharpProject1
                     Console.WriteLine($"Age: {Ages[i]}");
                     Console.WriteLine($"Date of Enrollment: {Dates[i]:yyyy-MM-dd HH:mm:ss}\n");
                     return;
-                }
-                Console.WriteLine("Student not found.");
+                }    
             }
+            Console.WriteLine("Student not found.");
         }
 
         static void ClassAverage()
@@ -239,7 +240,7 @@ namespace SimpleStudentManagementProject_CSharpProject1
             int IndexTopPerformance = 0;
             for (int i = 0; i < StudentCounter; i++)
             {
-                if (Marks[i] > IndexTopPerformance)
+                if (Marks[i] < IndexTopPerformance)
                 {
                     IndexTopPerformance = i;
                 }
@@ -258,7 +259,7 @@ namespace SimpleStudentManagementProject_CSharpProject1
             Console.WriteLine("Students sorted by marks in descending order.");
             for (int i = 0; i < StudentCounter; i++)
             {
-                for (int j = 0; j < StudentCounter; j++)
+                for (int j = i+1; j < StudentCounter; j++)
                 {
                     if (Marks[i] < Marks[j])
                     {
@@ -295,6 +296,7 @@ namespace SimpleStudentManagementProject_CSharpProject1
 
         static void DeleteStudentRecord()
         {
+            bool 
             int IndexName = 0;
             Console.WriteLine("Enter the name of student tou want to delete it: ");
             string DeleteName = Console.ReadLine().ToLower();
@@ -313,6 +315,7 @@ namespace SimpleStudentManagementProject_CSharpProject1
                     StudentCounter--;
 
                     Console.WriteLine("Student record deleted successfully.");
+                    
                 }
                 else
                 {
@@ -331,32 +334,7 @@ namespace SimpleStudentManagementProject_CSharpProject1
             
         }
 
-        static void tryAddStudent()
-        {
-            string name;
-            double mark;
-            int age;
-
-            if (StudentCounter >= 10)
-            {
-                Console.WriteLine("Can not add more than 10 students");
-            }
-            else
-            {
-                Console.WriteLine("Enter the name of student :");
-                name = Console.ReadLine();
-                Names[StudentCounter] = name;
-
-                Console.WriteLine("Enter the mark of student :");
-                mark = double.Parse(Console.ReadLine());
-                Marks[StudentCounter] = mark;
-
-                Console.WriteLine("Enter the age of student :");
-                age = int.Parse(Console.ReadLine());
-                Ages[StudentCounter] = age;
-
-            }
-        }
+        
 
     }
 
